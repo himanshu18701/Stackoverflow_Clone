@@ -8,5 +8,9 @@
 <form th:action="@{/questions/create}" method="GET">
     <input type="submit" value="ask question">
 </form>
+
+<ul th:each="question: ${questions}">
+    <li th:text="${question.title}"></li>
+</ul>
 </body>
 </html>

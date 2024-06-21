@@ -24,12 +24,14 @@ public class QuestionController {
     }
 
     @GetMapping("/home")
-    public String home() {
+    public String home(Model model) {
+        List<Question> questions = questionService.findAllQuestion();
+        model.addAttribute("questions", questions);
         return "home";
     }
 
     @GetMapping("/create")
-    public String home(Model model) {
+    public String showQuestionForm(Model model) {
         model.addAttribute("question", new Question());
         return "ask-question";
     }
