@@ -2,9 +2,11 @@ package com.mountblue.stackoverflow.service;
 
 import com.mountblue.stackoverflow.Entity.Question;
 import com.mountblue.stackoverflow.repository.QuestionRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class QuestionServiceImpl implements QuestionService {
 
     private final QuestionRepository questionRepository;
