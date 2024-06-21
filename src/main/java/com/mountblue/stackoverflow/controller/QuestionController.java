@@ -23,6 +23,11 @@ public class QuestionController {
         this.userService = userService;
     }
 
+    @GetMapping("/home")
+    public String home() {
+        return "home";
+    }
+
     @GetMapping("/create")
     public String home(Model model) {
         model.addAttribute("question", new Question());
