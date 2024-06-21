@@ -1,7 +1,9 @@
 package com.mountblue.stackoverflow.controller;
 
 import com.mountblue.stackoverflow.Entity.Question;
+import com.mountblue.stackoverflow.Entity.User;
 import com.mountblue.stackoverflow.service.QuestionService;
+import com.mountblue.stackoverflow.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,10 +15,12 @@ import java.util.List;
 @RequestMapping("/questions")
 public class QuestionController {
     QuestionService questionService;
+    UserService userService;
 
     @Autowired
-    public QuestionController(QuestionService questionService) {
+    public QuestionController(QuestionService questionService, UserService userService) {
         this.questionService = questionService;
+        this.userService = userService;
     }
 
     @GetMapping("/create")
@@ -26,7 +30,10 @@ public class QuestionController {
     }
 
     @PostMapping("/create")
-    public void create(@ModelAttribute("question") Question question) {
+    public String create(@ModelAttribute("question") Question question) {
+        User user = userService.findById(1);
+        question.setUser(user);
         questionService.saveQuestion(question);
+        return "redirect:/questions/create";
     }
 }
