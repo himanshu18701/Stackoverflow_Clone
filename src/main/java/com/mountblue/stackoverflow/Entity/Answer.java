@@ -31,20 +31,11 @@ public class Answer {
     private User user;
 
     @Column(name = "answer")
-    private String answer;
+    private String content;
 
     public Answer() {
     }
 
-    public Answer(int id, LocalDateTime createdAt, LocalDateTime updatedAt, int votes, Question question, User user, String answer) {
-        this.id = id;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-        this.votes = votes;
-        this.question = question;
-        this.user = user;
-        this.answer = answer;
-    }
 
     public int getId() {
         return id;
@@ -94,11 +85,11 @@ public class Answer {
         this.user = user;
     }
 
-    public String getAnswer() {
-        return answer;
+    public String getContent() {
+        return content;
     }
 
-    public void setAnswer(String answer) {
-        this.answer = answer;
+    public void setContent(String content) {
+        this.content = content;
     }
 }

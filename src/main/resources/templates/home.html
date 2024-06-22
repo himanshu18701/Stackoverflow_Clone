@@ -2,15 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>stack overflow</title>
+    <title>Stack Overflow Clone</title>
 </head>
 <body>
 <form th:action="@{/questions/create}" method="GET">
-    <input type="submit" value="ask question">
+    <input type="submit" value="Ask Question">
 </form>
-
-<ul th:each="question: ${questions}">
-    <li th:text="${question.title}"></li>
+<ul>
+    <li th:each="question : ${questions}">
+        <a th:href="@{/questions/{id}(id=${question.id})}" th:text="${question.title}"></a>
+    </li>
 </ul>
 </body>
 </html>

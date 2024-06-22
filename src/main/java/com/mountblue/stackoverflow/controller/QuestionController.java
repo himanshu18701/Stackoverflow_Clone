@@ -1,7 +1,9 @@
 package com.mountblue.stackoverflow.controller;
 
+import com.mountblue.stackoverflow.Entity.Answer;
 import com.mountblue.stackoverflow.Entity.Question;
 import com.mountblue.stackoverflow.Entity.User;
+import com.mountblue.stackoverflow.service.AnswerService;
 import com.mountblue.stackoverflow.service.QuestionService;
 import com.mountblue.stackoverflow.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +18,13 @@ import java.util.List;
 public class QuestionController {
     QuestionService questionService;
     UserService userService;
+    private final AnswerService answerService;
 
     @Autowired
-    public QuestionController(QuestionService questionService, UserService userService) {
+    public QuestionController(QuestionService questionService, UserService userService, AnswerService answerService) {
         this.questionService = questionService;
         this.userService = userService;
+        this.answerService = answerService;
     }
 
     @GetMapping("/home")
@@ -42,5 +46,15 @@ public class QuestionController {
         question.setUser(user);
         questionService.saveQuestion(question);
         return "redirect:/questions/create";
+    }
+
+    @GetMapping("/{id}")
+    public String showQuestion(@PathVariable("id") int id, Model model) {
+        Question question = questionService.findQuestionById(id);
+        List<Answer> answers = answerService.findAllAnswers(id);
+        model.addAttribute("question", question);
+        model.addAttribute("answers", answers);
+        model.addAttribute("answer", new Answer());
+        return "question-page";
     }
 }
