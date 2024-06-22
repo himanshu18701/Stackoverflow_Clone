@@ -3,6 +3,7 @@ package com.mountblue.stackoverflow.Entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "answers")
@@ -32,6 +33,9 @@ public class Answer {
 
     @Column(name = "answer")
     private String content;
+
+    @OneToMany(mappedBy = "answer",cascade = CascadeType.ALL)
+    private List<Comment> comments;
 
     public Answer() {
     }

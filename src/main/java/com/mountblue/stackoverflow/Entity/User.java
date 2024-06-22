@@ -30,6 +30,9 @@ public class User {
     @OneToMany(mappedBy="user",cascade= CascadeType.ALL)
     private List<Answer> answers;
 
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    private List<Comment> comments;
+
     public User() {
     }
 
